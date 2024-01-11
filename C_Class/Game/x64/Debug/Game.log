@@ -1,0 +1,5 @@
+﻿  Source.c
+C:\Users\Administrator\Desktop\C_Class\Game\Source.c(48,2): warning C4013: 'srand' undefined; assuming extern returning int
+C:\Users\Administrator\Desktop\C_Class\Game\Source.c(51,17): warning C4013: 'rand' undefined; assuming extern returning int
+C:\Users\Administrator\Desktop\C_Class\Game\Source.c(63,3): warning C4013: 'system' undefined; assuming extern returning int
+  Game.vcxproj -> C:\Users\Administrator\Desktop\C_Class\Game\x64\Debug\Game.exe
