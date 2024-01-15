@@ -1,71 +1,101 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <conio.h>	 //키이동을 할 수 있도록 도와주는 헤더파일 key
+#include <windows.h> //좌표이동을 할 수 있도록 도와주는 헤더파일 Coordinate 
+					 // -> COORD(좌표설정)에 필요한 헤더파일
 
-#define BUFFER_SIZE 10000
+#define UP 72
+#define LEFT 75
+#define RIGHT 77
+#define DOWN 80
 
-void LoadFile(const char* fileName) {
-	//"data.txt" 파일을 열어주고 r (읽기) 모드로 설정합니다.
-	FILE* file = fopen(fileName, "r");
+void GotoXY(int x, int y)
+{
+	// x, y 좌표 설정
+	COORD position = { x, y };
 
-	// 상대 경로
-	// 절대 경로
-
-	char buffer[BUFFER_SIZE] = { 0, };
-
-	fread(buffer, 1, BUFFER_SIZE, file); // 전체 파일을 읽어주는 함수
-
-	printf("%s", buffer);
-
-	fclose(file);
+	// 커서 이동 함수
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),position);
 }
 
 int main() 
 {
-#pragma region 파일 쓰기
-	////"data.txt" 파일을 생성하고 w(쓰기) 모드로 설정합니다.
-	//FILE * file = fopen("data.txt","w");
+	int i = 2;
+	int	j = 5;
+	GotoXY(i, j);
+	printf("☆");
 
-	//fputs("level 10", file);
 
-	//// 파일을 닫아줍니다.
-	//fclose(file);
+	char key = 0;
+	while (1)
+	{
+		if (_kbhit()) //키보드 입력확인 (true/false)
+		{
+			
+			key = _getch();	// key 입력을 받아주는 함수
 
-#pragma endregion
-#pragma region 파일 이어쓰기
-	////"data.txt" 파일을 생성하고 a (이어쓰기) 모드로 설정합니다.
-	//FILE * file = fopen("data.txt","a");
+			system("cls");
 
-	//fputs("\nMP 100", file);
+			if (key == -32)
+			{
+				key = _getch();
+			}
 
-	//// 파일을 닫아줍니다.
-	//fclose(file);
-#pragma endregion
-#pragma region 파일 읽기
-	////"data.txt" 파일을 열어주고 r (읽기) 모드로 설정합니다.
-	//FILE * file = fopen("Image/Pika.txt","r");
-
-	//// 상대 경로
-	//// 절대 경로
-
-	//char buffer[BUFFER_SIZE] = { 0,};
-
-	//fread(buffer, 1, BUFFER_SIZE, file); // 전체 파일을 읽어주는 함수
-
-	//printf("%s", buffer);
-
-	//fclose(file);
+			switch (key)
+			{
+			case UP: 
+				if (j > 0) { j--; }	
+				break;
+			case LEFT:
+				if (i > 0){ i -= 2;}
+				break;
+			case RIGHT: i += 2;
+				break;
+			case DOWN: j++;
+				break;
+			}
+		
+			//if조건문에서 조건 두개 &&(and), ||(or)
+		
+			GotoXY(i, j);
+			printf("☆");
+		}
+	}
 	
-	//함수로 txt명만 변경하면 실행될 수 있게끔
-	LoadFile("Image/Pika.txt");
-	LoadFile("Image/Meta.txt");
 
+	//while (1)
+	//{
+	//	if (_kbhit()) //키보드 입력확인 (true/false)
+	//	{
+	//		key = _getch();	// key 입력을 받아주는 함수
+	//		
+	//		// printf("입력 값 : %c\n", key);
 
-#pragma endregion
+	//		if(key == -32)
+	//		{
+	//			key = _getch();
+	//			// _getch(); 처음 입력받으면 0이 아닌 다른 수가 저장되어 있기 때문에 -32라는 수가 출력된다.
+	//			// 그래서 한번더 입력받아줌으로서 본래의 값이 입력되도록 한다.
+	//		}
 
-
+			//switch (key)
+			//{
+			//	case UP : printf("UP\n");
+			//		break;
+			//	case LEFT : printf("LEFT\n");
+			//		break;
+			//	case RIGHT : printf("RIGHT\n");
+			//		break;
+			//	case DOWN : printf("DOWN\n");
+			//		break;
+			//	default: printf("key 변수의 값 : %d\n",key);
+			//		break;
+	//		}
+	//	}
+	//}
 
 
 
 	return 0;
-}
 
+}
