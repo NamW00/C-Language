@@ -1,101 +1,70 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <conio.h>	 //키이동을 할 수 있도록 도와주는 헤더파일 key
-#include <windows.h> //좌표이동을 할 수 있도록 도와주는 헤더파일 Coordinate 
-					 // -> COORD(좌표설정)에 필요한 헤더파일
+#include <string.h>
 
-#define UP 72
-#define LEFT 75
-#define RIGHT 77
-#define DOWN 80
+#define WIDTH 11
+#define HEIGHT 11
 
-void GotoXY(int x, int y)
+char maze[WIDTH][HEIGHT];
+
+void CreateMaze()
 {
-	// x, y 좌표 설정
-	COORD position = { x, y };
+	// 0 : 빈 공간 (" ")
+	// 1 : 벽 (□)
+	// 2 : 탈출구 (◎)
 
-	// 커서 이동 함수
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),position);
+	strcpy(maze[0], "1011111111");
+	strcpy(maze[1], "1000111111");
+	strcpy(maze[2], "1110100011");
+	strcpy(maze[3], "1110001001");
+	strcpy(maze[4], "1000101111");
+	strcpy(maze[5], "1010100011");
+	strcpy(maze[6], "1011111011");
+	strcpy(maze[7], "1000001111");
+	strcpy(maze[8], "1110100111");
+	strcpy(maze[9], "1000110001");
+	strcpy(maze[10], "1111111102");
 }
 
-int main() 
+void Render()
 {
-	int i = 2;
-	int	j = 5;
-	GotoXY(i, j);
-	printf("☆");
-
-
-	char key = 0;
-	while (1)
+	for (int i = 0; i < WIDTH; i++)
 	{
-		if (_kbhit()) //키보드 입력확인 (true/false)
-		{
-			
-			key = _getch();	// key 입력을 받아주는 함수
-
-			system("cls");
-
-			if (key == -32)
-			{
-				key = _getch();
-			}
-
-			switch (key)
-			{
-			case UP: 
-				if (j > 0) { j--; }	
-				break;
-			case LEFT:
-				if (i > 0){ i -= 2;}
-				break;
-			case RIGHT: i += 2;
-				break;
-			case DOWN: j++;
-				break;
-			}
-		
-			//if조건문에서 조건 두개 &&(and), ||(or)
-		
-			GotoXY(i, j);
-			printf("☆");
+		for (int j = 0; j < HEIGHT; j++) {
+			printf("%c", maze[i][j]);
 		}
+		printf("\n");
 	}
-	
 
-	//while (1)
-	//{
-	//	if (_kbhit()) //키보드 입력확인 (true/false)
-	//	{
-	//		key = _getch();	// key 입력을 받아주는 함수
-	//		
-	//		// printf("입력 값 : %c\n", key);
+}
 
-	//		if(key == -32)
-	//		{
-	//			key = _getch();
-	//			// _getch(); 처음 입력받으면 0이 아닌 다른 수가 저장되어 있기 때문에 -32라는 수가 출력된다.
-	//			// 그래서 한번더 입력받아줌으로서 본래의 값이 입력되도록 한다.
-	//		}
+//typedef struct Student
+//{
+//	char name[10];
+//}Student;
 
-			//switch (key)
-			//{
-			//	case UP : printf("UP\n");
-			//		break;
-			//	case LEFT : printf("LEFT\n");
-			//		break;
-			//	case RIGHT : printf("RIGHT\n");
-			//		break;
-			//	case DOWN : printf("DOWN\n");
-			//		break;
-			//	default: printf("key 변수의 값 : %d\n",key);
-			//		break;
-	//		}
-	//	}
-	//}
+int	main()
+{
+#pragma region strcpy
+	//Student student;
 
+	//student.name;
 
+	//// student.name = "KIM";  주소값에 주소를 넣는 것 자체가 말이 안되는 것
 
+	////strcpy 매개변수는 두개가 들어감
+	//// 첫번째 매개변수 : 복사받을 문자 배열을 넣어줍니다.
+	//// 두번째 매개변수 : 복사시킬 문자열을 넣어줍니다.
+	//strcpy(student.name, "KIM");
+
+	//printf("student.name의 값 : %s\n", student.name);
+
+	//strcpy(student.name, "NAM");
+
+	//printf("student.name의 값 : %s\n", student.name);
+
+#pragma endregion
+	CreateMaze();
+	Render();
 	return 0;
-
 }
