@@ -1,29 +1,54 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>	
+#include <windows.h>
+
+#define UP 72
+#define LEFT 75
+#define RIGHT 77
+#define DOWN 80
+
+void GotoXY(int x, int y)
+{
+	// x, y 좌표 설정
+	COORD position = { x, y };
+
+	// 커서 이동 함수
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
+}
+
 
 #define WIDTH 11
 #define HEIGHT 11
 
 char maze[WIDTH][HEIGHT];
 
+typedef struct Player
+{
+	int x;
+	int y;
+	const char * shape;
+
+}Player;
+
 void CreateMaze()
 {
-	// 0 : 빈 공간 (" ")
-	// 1 : 벽 (□)
+	// 0 : 빈 공간 (" ") -> but 특수 문자가 2byte이므로 2번 띄어줘야한다.
+	// 1 : 벽 (■)
 	// 2 : 탈출구 (◎)
 
-	strcpy(maze[0], "1011111111");
-	strcpy(maze[1], "1000111111");
-	strcpy(maze[2], "1110100011");
-	strcpy(maze[3], "1110001001");
+	strcpy(maze[0], "1111111111");
+	strcpy(maze[1], "1000100001");
+	strcpy(maze[2], "1110001101");
+	strcpy(maze[3], "1110101001");
 	strcpy(maze[4], "1000101111");
 	strcpy(maze[5], "1010100011");
-	strcpy(maze[6], "1011111011");
-	strcpy(maze[7], "1000001111");
-	strcpy(maze[8], "1110100111");
-	strcpy(maze[9], "1000110001");
-	strcpy(maze[10], "1111111102");
+	strcpy(maze[6], "1110111001");
+	strcpy(maze[7], "1000001101");
+	strcpy(maze[8], "1011101111");
+	strcpy(maze[9], "1000100021");
+	strcpy(maze[10], "1111111111");
 }
 
 void Render()
@@ -31,11 +56,67 @@ void Render()
 	for (int i = 0; i < WIDTH; i++)
 	{
 		for (int j = 0; j < HEIGHT; j++) {
-			printf("%c", maze[i][j]);
+			switch (maze[i][j])
+			{
+			case '0':
+				printf("  ");
+				break;
+			case '1':
+				printf("■");
+				break;
+			case '2':
+				printf("◎");
+				break;
+			default:
+				break;
+			}
+			/*if (maze[i][j] == '0')
+			{
+				printf("  ");
+			}
+			else if (maze[i][j] == '1')
+			{
+				printf("■");
+			}
+			else if  (maze[i][j] == '2')
+			{
+				printf("◎");
+			}*/
+		//	printf("%c", maze[i][j]);		//이 때 maze는 숫자가 아닌 문자열이므로 %c를 써야함
 		}
 		printf("\n");
 	}
 
+}
+
+void Keyboard(char map[WIDTH][HEIGHT], Player * player)
+{	
+	char key = 0;
+
+	if (_kbhit()) //키보드 입력확인 (true/false)
+	{
+
+		key = _getch();	// key 입력을 받아주는 함수
+
+		system("cls");
+
+		if (key == -32)
+		{
+			key = _getch();
+		}
+
+		switch (key)
+		{
+		case UP: player -> y--;
+			break;
+		case LEFT: player -> x -= 2;
+			break;
+		case RIGHT: player -> x += 2;
+			break;
+		case DOWN: player  -> y++;
+			break;
+		}
+	}
 }
 
 //typedef struct Student
@@ -64,7 +145,23 @@ int	main()
 	//printf("student.name의 값 : %s\n", student.name);
 
 #pragma endregion
+	Player player = {2,1,"☆"};
+
+	// 1. 맵 데이터를 생성합니다.
 	CreateMaze();
-	Render();
+
+	while (1)
+	{
+		// 2. 맵 데이터에 있는 정보를 토대로 출력합니다.
+		Render();
+		GotoXY(player.x, player.y);
+		printf("%s", player.shape);
+		Sleep(200);
+		system("cls");
+	}
+
+	
+	
+
 	return 0;
 }
