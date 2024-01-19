@@ -1,2 +1,11 @@
-﻿  Source.c
+﻿  Source.cpp
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(27,21): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(27,24): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(39,17): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(39,24): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(42,29): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(42,40): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(122,27): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(122,29): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\Administrator\Desktop\C-Language\C_Class\Game\Source.cpp(132,9): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
   Game.vcxproj -> C:\Users\Administrator\Desktop\C-Language\C_Class\Game\x64\Debug\Game.exe
