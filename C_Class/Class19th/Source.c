@@ -145,24 +145,24 @@ int	main()
 	//printf("student.name의 값 : %s\n", student.name);
 
 #pragma endregion
-	//Player player = {2,1,"☆"};
+	Player player = {2,1,"☆"};
 
-	//// 1. 맵 데이터를 생성합니다.
-	//CreateMaze();
+	// 1. 맵 데이터를 생성합니다.
+	CreateMaze();
 
-	//while (1)
-	//{
-	//	// 2. 맵 데이터에 있는 정보를 토대로 출력합니다.
-	//	Render();
+	while (1)
+	{
+	// 2. 맵 데이터에 있는 정보를 토대로 출력합니다.
+	Render();
 
-	//	Keyboard(maze, &player);	//map[][]가 하나의 포인터라고 해당된다. maze가 Keyboard 함수의 char 
+	Keyboard(maze, &player);	//map[][]가 하나의 포인터라고 해당된다. maze가 Keyboard 함수의 char 
 
-	//	GotoXY(player.x, player.y);
-	//	printf("%s", player.shape);
+	GotoXY(player.x, player.y);
+	printf("%s", player.shape);
 
-	//	Sleep(100);
-	//	system("cls");
-	//}
+	Sleep(100);
+	system("cls");
+	}
 
 	return 0;
 }
